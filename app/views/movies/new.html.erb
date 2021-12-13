@@ -1,0 +1,12 @@
+<%= form_for(@movie) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title%>
+    <%= f.label :overview %>
+    <%= f.text_field :overview %>
+    <%= f.label :poster_url %>
+    <%= f.text_field :poster_url %>
+    <%= f.label :rating %>
+    <%= f.text_field :rating %>
+    <%= f.submit %>
+  </div>
+<% end %>
