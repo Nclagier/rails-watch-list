@@ -1,1 +1,29 @@
-<h1> <%= @list.name %> </h1>
+<div class="container">
+  <h1>
+    <%= @list.name %>
+    <%= link_to "Add a movie for #{@list.name}", new_list_bookmark_path(@list), { class: "btn btn-primary" } %>
+  </h1>
+  <br>
+  <%# ------------------------------------------------------------------------------------ %>
+  <div class="card justify-content-around pl-3 py-2">
+    <% @list.movies.each do |movie| %>
+        <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+        <div>
+          <%= image_tag movie.poster_url, alt: movie.title, style: 'height:8%;width:6%;' %>
+          <h4><strong><%= movie.title %></strong> [<%= movie.rating %>] </h4>
+        </div>
+        <div>
+          <small><%= movie.overview %></small>
+          <p><i class="fas fa-quote-left mr-2"></i><small><%= bookmark.comment %></small>
+          <small><%= link_to 'Supprimer', bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></small></p>
+        </div>
+      <% end %>
+    </div>
+  <%# -------------------------------------------------------------------------------------- %>
+  <br>
+  <br>
+  <%= link_to "Supprimer la liste", list_path(@list),style: 'color:red;', method: :delete, data: { confirm: 'Are you sure you want to delete this list?' } %>
+  <br>
+  <br>
+  <%= link_to "Retour à l'accueil", lists_path(@list) %>
+</div>
